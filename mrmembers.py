@@ -3,12 +3,18 @@
 import sys
 import csv
 import string
+import zipfile
 
 if len(sys.argv) > 1:
   filename = sys.argv[1]
-  print ("csv file used: " + str(filename) + "\n")
+  print ("file used: " + str(filename))
+  if ".zip" in filename:
+    print ("filename contains .zip, extracting "+str(filename)+" ...\n")
+    with zipfile.ZipFile(filename, "r") as z:
+      z.extractall()
+      filename = string.replace(filename, '.zip', '.csv')
 else:
-  print "please provide csv file!"
+  print "please provide zip or csv file!"
   raise sys.exit()
 
 # DEBUG dump 1st 200 bytes
