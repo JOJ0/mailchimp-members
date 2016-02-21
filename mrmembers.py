@@ -4,8 +4,9 @@ import sys
 import csv
 import string
 import zipfile
-import operator
+#import operator
 import pprint
+from subprocess import call
 
 # puts field data to lower case
 def lower_getter(field):
@@ -80,4 +81,7 @@ with open(filename, 'rb') as csvfile:
       #print row['E-Mail Adresse'], row['First Name'], row['Last Name']
       writer.writerow({'E-Mail': row['E-Mail Adresse'], 'First Name': row['First Name'], 'Last Name': row['Last Name']})
 
-print ("file written: " + str(filename2))
+print "file written: " + str(filename2)
+print "starting libreoffice calc... "
+call(['/Applications/LibreOffice.app/Contents/MacOS/soffice', '-n', '/Users/jojo/Documents/privat/mr/maillinglist_print_template.ots'])
+
