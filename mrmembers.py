@@ -19,11 +19,12 @@ def lower_getter(field):
 
 if len(sys.argv) > 1:
   filename = sys.argv[1]
+  filenamepath=filename.rsplit('/',1)[0]
   print ("file used: " + str(filename))
   if ".zip" in filename:
-    print ("filename contains .zip, extracting "+str(filename)+" ...\n")
+    print ("filename contains .zip, extracting "+str(filename)+" to path "+str(filenamepath)+" ...\n")
     with zipfile.ZipFile(filename, "r") as z:
-      z.extractall()
+      z.extractall(filenamepath)
       filename = string.replace(filename, '.zip', '.csv')
 else:
   print "please provide zip or csv file!"
@@ -83,5 +84,8 @@ with open(filename, 'rb') as csvfile:
 
 print "file written: " + str(filename2)
 print "starting libreoffice calc... "
-call(['/Applications/LibreOffice.app/Contents/MacOS/soffice', '-n', '/Users/jojo/Documents/privat/mr/maillinglist_print_template.ots'])
+call(['/Applications/LibreOffice.app/Contents/MacOS/soffice', '-n', '/Users/jojo/Documents/privat/mr/maillinglist_print_template.ods'])
+#FIXME how to run second LibreOffice instance with NEW document? how does call work?
+# import to NEW document, copy/paste to print_template which should also be already open
+#call(['/Applications/LibreOffice.app/Contents/MacOS/soffice', '-n'])
 
