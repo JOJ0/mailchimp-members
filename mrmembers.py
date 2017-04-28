@@ -20,12 +20,16 @@ def lower_getter(field):
 if len(sys.argv) > 1:
   filename = sys.argv[1]
   filenamepath=filename.rsplit('/',1)[0]
+  filenamefile=filename.rsplit('/',1)[1]
   print ("file used: " + str(filename))
   if ".zip" in filename:
-    print ("filename contains .zip, extracting "+str(filename)+" to path "+str(filenamepath)+" ...\n")
+    print ("filename contains .zip, extracting "+str(filenamefile)+" to path "+str(filenamepath)+" ...\n")
     with zipfile.ZipFile(filename, "r") as z:
       z.extractall(filenamepath)
-      filename = string.replace(filename, '.zip', '.csv')
+      #filename = string.replace(filename, '.zip', '.csv')
+      filenamefile = string.replace(filenamefile, '.zip', '.csv')
+      filenamefile = "subscribed_"+filenamefile
+      filename=filenamepath+"/"+filenamefile
 else:
   print "please provide zip or csv file!"
   raise sys.exit()
