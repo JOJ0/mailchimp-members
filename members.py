@@ -7,6 +7,7 @@ import zipfile
 import pprint
 import operator
 from subprocess import call
+import os
 
 
 # returns lower case version of fields data
@@ -21,8 +22,10 @@ def lower_getter(field):
 print ("")
 if len(sys.argv) > 1:
   filename = sys.argv[1]
-  filenamepath=filename.rsplit('/',1)[0]
-  filenamefile=filename.rsplit('/',1)[1]
+  filenamefile=os.path.basename(filename)
+  filenamepath=os.path.dirname(filename)
+  if filenamepath=="":
+    filenamepath="."
   if ".zip" in filename:
     print("filename contains .zip, extracting "+str(filenamefile)+" to "+str(filenamepath)+"\n")
     with zipfile.ZipFile(filename, "r") as z:
@@ -32,7 +35,7 @@ if len(sys.argv) > 1:
       filename=filenamepath+"/"+filenamefile
   else:
     print("filename does not contain .zip, assuming "+str(filenamefile)+" contains csv data"+"\n")
-    filename=filenamepath+"/"+filenamefile
+    filename=filenamepath+filenamefile
 else:
   print("please provide zip or csv file!")
   raise sys.exit()
