@@ -32,10 +32,10 @@ if len(sys.argv) > 1:
       z.extractall(filenamepath)
       filenamefile = string.replace(filenamefile, '.zip', '.csv')
       filenamefile = "subscribed_"+filenamefile
-      filename=filenamepath+"/"+filenamefile
+      filename = os.path.join(filenamepath, filenamefile)
   else:
     print("filename does not contain .zip, assuming "+str(filenamefile)+" contains csv data"+"\n")
-    filename=filenamepath+filenamefile
+    filename=os.path.join(filenamepath, filenamefile)
 else:
   print("please provide zip or csv file!")
   raise sys.exit()
